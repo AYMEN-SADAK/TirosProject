@@ -1,0 +1,57 @@
+
+<div class="jumbotron text-center">
+<div class="justify-content-md-center row" >
+  <div class="align-items-center">
+    <form [formGroup]= "myform" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name">Nom</label>
+          <input formControlName="name"  type="text" class="form-control" id="name" name="name" placeholder="Nom de la pièce">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="id">Identifiant</label>
+          <input formControlName="id"  type="text" class="form-control" id="id" name="id" placeholder="Identifiant de la pièce">
+        </div>
+      </div>
+<br>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input  formControlName="description"  type="text" class="form-control" id="description"  name="description" placeholder="La description complète">
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="details">Détails</label>
+          <input  formControlName="details"  type="text" class="form-control" id="details" name="details">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="categorie">Categorie</label>
+          <select formControlName="categorie"   id="categorie" name="categorie" class="form-control">
+            <option selected>Choisir....</option>
+            <option>...</option>
+          </select>
+        </div>
+        <br>
+        <div class="form-group col-md-2">
+          <label for="code">Code</label>
+          <input  formControlName="code"  type="text"  name="code" class="form-control" id="code">
+        </div>
+      </div>
+<br><br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01"
+                 aria-describedby="inputGroupFileAddon01">
+          <label style="text-align: left ;" class="custom-file-label" for="inputGroupFile01">Choisir une image</label>
+        </div>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-success">Ajouter</button>
+    </form>
+
+  </div>
+</div>
+</div>

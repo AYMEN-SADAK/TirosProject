@@ -1,0 +1,64 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+
+<div class="container-fluid">
+  <br>
+  <h1 class="text-warning">Vitrages</h1>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr >
+      <th scope="col">N°</th>
+      <th scope="col">Numéro</th>
+      <th scope="col">Type</th>
+      <th scope="col">Fournisseur</th>
+      <th scope="col">Plus</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vitr of Vitrages ; index as i">
+      <th scope="row">{{i+1}}</th>
+      <th scope="row">{{vitr.Numero}}</th>
+      <td>{{vitr.Type}}</td>
+      <td>{{vitr.Fournisseur}}</td>
+      <td>
+
+
+        <button style="position: relative;left: 5%" type="button" class="btn btn-danger btn-sm" (click)="delete(poseur)">
+          Supprimer
+        </button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a class="text-success" (click)="add()" *ngIf="name==='Admin' || name==='Insert'"><img src="../../assets/images/newpr.png" width="100" height="100">Ajouter un vitrage</a>
+
+  <form [formGroup]="myform" (ngSubmit)="onSubmit()" [hidden]="demAjout===false">
+    <br><br>
+    <div style="position: relative;left:10%">
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Type :</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="type" id="type" placeholder="Type">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="fourn">Fournisseur</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="fourn" id="fourn" placeholder="Fournisseur">
+      </div>
+    </div>
+    <br>
+    </div>
+    <button type="submit" class="btn btn-success" (click)="dem()">Confirmer</button>
+    <button type="submit" class="btn btn-danger" (click)="annuller()">Annuler</button>
+    <br><br><br><br>
+  </form>
+
+
+
+</div>

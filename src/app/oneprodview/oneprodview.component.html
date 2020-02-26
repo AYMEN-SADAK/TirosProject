@@ -1,0 +1,146 @@
+<div class="container" id="print">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th colspan="3">
+
+        <div class="row">
+          <div class="col-2">
+            <img style="float: left" width="100" height="60" src="../../assets/images/logoT.png">
+          </div>
+
+          <div class="col-8">
+           <div class="row">
+             <div class="col-4"></div>
+             <p>
+               Fiche Produit :
+             </p>
+           </div>
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4" style="margin-left: 10px">
+              <qrcode title="" [qrdata]="'https://tirosproject.netlify.com/product/'+id" [size]="56" [level]="'M'"></qrcode>
+              </div>
+              <div class="col-4"></div>
+              </div>
+          </div>
+
+          <div class="col-2">
+          <img width="100" height="60"  style="float: right" src="../../assets/images/logoG.png">
+          </div>
+        </div>
+
+      </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Quantité :</td>
+      <td colspan="2">{{product.quantite}}</td>
+
+    </tr>
+
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Réference :</td>
+      <td colspan="2">{{product.Ref}}</td>
+    </tr>
+
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Date de lancement :</td>
+      <td colspan="2">{{'  '+(product.Date | date )}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Description :</td>
+      <td colspan="2">{{product.Description}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Projet :</td>
+      <td colspan="2">{{product.ProjectId}}</td>
+    </tr>
+    <tr *ngIf="!isExact">
+      <td style="background-color: #dee2e6;color: darkorange">Localisation </td>
+      <td colspan="2">{{product.Loc}}</td>
+    </tr>
+<tr *ngIf="isExact">
+  <td rowspan="3" style="background-color: #dee2e6;color: darkorange"><p style="color:whitesmoke;margin-top: 12%">Localisation </p></td>
+  <td  style="background-color: #dee2e6;color: darkorange;text-align: center">Groupe d'habitation </td>
+  <td>{{product.Gh}}</td>
+<tr *ngIf="isExact">
+  <td  style="background-color: #dee2e6;color: darkorange">Immeuble </td>
+  <td>{{product.Im}}</td>
+    </tr>
+    <tr *ngIf="isExact">
+      <td style="background-color: #dee2e6;color: darkorange">Etage </td>
+  <td>{{product.Etage}}</td>
+    </tr>
+
+
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Vitrage :</td>
+      <td colspan="2">{{product.VitrageId}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Vitreurs :</td>
+      <td colspan="2"><p *ngFor="let vitreur of product.Vitreurs">{{vitreur}}</p></td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Date de Vitrage :</td>
+      <td colspan="2">{{product.DateV}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Aluminium :</td>
+      <td colspan="2">{{product.AluId}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Assembleurs :</td>
+      <td colspan="2"><p  *ngFor="let assembleur of product.Assembleurs">{{assembleur}}</p></td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Date Assemblage :</td>
+      <td colspan="2">{{product.DateAss}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Poseurs :</td>
+      <td colspan ><p *ngFor="let poseur of product.Poseurs">{{poseur}}</p></td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Date Pose :</td>
+      <td colspan="2">{{product.DateP}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Longueur :</td>
+      <td colspan="2">{{product.Longueur}}</td>
+
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color: darkorange">Largeur :</td>
+      <td colspan="2">{{product.Largeur}}</td>
+    </tr>
+    <tr>
+      <td style="background-color: #dee2e6;color:dodgerblue">Lien DropBox :</td>
+      <td colspan="2">{{product.link}}</td>
+    </tr>
+    <tr *ngIf="product.SProducts">
+      <td colspan="3" style="background-color: #dee2e6;color: darkorange">Composantes :</td>
+    </tr>
+    <tr *ngFor=" let sprod of product.SProducts; index as j ">
+      <td *ngIf="sprod.ref">
+      {{sprod.nbr}}
+      </td>
+      <td *ngIf="sprod.ref">
+        {{sprod.ref}}
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+</div>
+      <button ngxPrint [printSectionId]="'print'" [useExistingCss]="true"><img width="50"  height="42" src="../../assets/images/print.png"></button>
+
+
+
+
+

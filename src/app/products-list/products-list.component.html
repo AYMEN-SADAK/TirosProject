@@ -1,0 +1,307 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+
+<div class="container-fluid" >
+<br>
+<h1 class="text-warning">Produits</h1>
+<br>
+
+  <table class="table">
+  <thead class="thead-dark">
+  <tr >
+    <th scope="col"> <input checked="tr" (click)="triDate()" type="radio" id="date" name="tri">  &nbsp;Date</th>
+    <th scope="col"> <input (click)="triRef()" type="radio" id="ref" name="tri">  &nbsp;Réference</th>
+    <th scope="col"> Description</th>
+    <th scope="col"> <input (click)="triProjet()" type="radio" id="projet" name="tri">  &nbsp;Projet</th>
+    <th scope="col"> Plus</th>
+  </tr>
+  </thead>
+  <tbody >
+  <tr *ngFor="let prod of products ; index as i">
+    <th scope="row">{{prod.Date}}</th>
+    <td>{{prod.Ref}}</td>
+    <th scope="row">{{prod.Description}}</th>
+    <td>{{prod.ProjectId}}</td>
+    <td>
+
+      <button type="button" class="btn btn-default btn-sm" (click)="open(prod.Ref)">
+      <span class="glyphicon glyphicon-plus"></span> Détails
+      </button>
+      <button style="position: relative;left: 6%" [useExistingCss]="true"  [printSectionId]="'toPrint'+i" ngxPrint><img width="50"  height="42" src="../../assets/images/print.png"></button>
+    <button style="position: relative;left: 12%" type="button" class="btn btn-danger btn-sm" (click)="delete(prod)">
+      Supprimer
+    </button>
+
+      <div hidden="true" [id]="'toPrint'+i" >
+
+            <div style="color:black;font-family: 'Arial Black',sans-serif ;margin-left: 25%;width: 490px;height: 490px;border-style: solid;border-width: 10px;border-color: black;margin-bottom : 10px" *ngFor="let j of getarray(prod.quantite); index as ind " class="card promoting-card">
+
+              <!-- Card content -->
+              <div class="card-body d-flex" >
+
+                <!-- Avatar -->
+                <img  src="../../assets/images/logoT.png" class="mr-3" height="80px" width="150px" >
+
+                <!-- Content -->
+                <div>
+
+                  <!-- Subtitle -->
+                  <p class="card-text" style="font-size: 7pt; margin-left: 130px">Date :<i class="far fa-clock-o pr-2"></i>{{curDate | date:'dd-MM-yyyy'}}</p>
+                  <!-- Title -->
+                  <h4 class="card-title font-weight-bold mb-2" style="font-size: 11pt;margin-left: 140px"><i>Ref : </i>{{prod.Ref}}</h4>
+
+
+                </div>
+
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body">
+
+                <div  style="margin-left: 10%">
+
+                  <!-- Text -->
+
+                  <b> <p style="margin-bottom: 2%;margin-top: 4%;color:black;font-size: 10pt" class="card-text" id="collapseContet"> &bull; <strong style="text-decoration-style: solid">N° :   {{ind+1}} / {{prod.quantite}} </strong></p></b>
+                  <b> <p style="margin-bottom:3%; color:black;font-size: 10pt" class="card-text" id="collapseConet"> &bull; <strong> {{prod.Description}}</strong></p></b>
+                  <b><p style="margin-bottom: 2%;color:black;font-size: 10pt" id="collapseCotent"> &bull; <strong>	Dimensions en centimètres : </strong> </p></b>
+                  <b > <p class="card-text" style="margin-bottom: 1%;color:black;font-size: 12pt;margin-left: 80px" id="collpseCotent"> {{prod.Longueur}} x {{prod.Largeur}}</p></b>
+
+                  <qrcode class=" float-right p-1 my-1" [qrdata]="'https://tirosproject.netlify.com/product/'+i" [size]="150" [level]="'M'"></qrcode>
+
+                </div>
+
+
+
+
+<!--
+          <div style="padding: 9.3%" *ngFor="let j of getarray(prod.quantite)">
+            <qrcode [qrdata]="'https://tirosproject.netlify.com/product/'+i" [size]="100" [level]="'M'"></qrcode>
+          </div>
+
+
+-->
+              </div>
+            </div>
+          </div>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a class="text-success"  *ngIf="name==='Admin' || name==='Insert'" (click)="add()" ><img src="../../assets/images/newpr.png" width="100" height="100">Ajouter un produit</a>
+
+<form [formGroup]="myform" (ngSubmit)="onSubmit()" [hidden]="demAjout===false">
+  <br><br>
+  <div style="position: relative;left:10%">
+    <div class="form-group row col-md-8">
+      <label for="inputEmail3" class="col-sm-4 col-form-label">Quantité</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" formControlName="quantite" id="quantite" placeholder="Quantité" value="1">
+      </div>
+    </div>
+ <div class="form-group row col-md-8">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">Description</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" formControlName="Description" id="Description" placeholder="Description">
+    </div>
+  </div>
+    <br>
+  <div class="form-group row col-md-8">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">Date de debut</label>
+    <div class="col-sm-8">
+      <input type="date" name="date" id="date" formControlName="date">
+    </div>
+  </div>
+
+  <div class="form-group row col-md-8">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">Projet</label>
+    <div class="col-sm-8">
+      <select id="projet" class="form-control" formControlName="projet" name="projet">
+        <option selected>Choisir...</option>
+        <option *ngFor="let proj of projects; index as i">{{proj.Nom}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row col-md-8">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">Vitrage</label>
+    <div class="col-sm-8">
+      <select id="vitrage" class="form-control" formControlName="vitrage" name="vitrage">
+        <option selected>Choisir...</option>
+        <option *ngFor="let vitrage of vitrages; index as i">{{vitrage.Numero}}---{{vitrage.Type}}</option>
+      </select>    </div>
+  </div>
+<br>
+    <div class="form-group row col-md-8">
+      <label for="inputEmail3" class="col-sm-4 col-form-label">Date de vitrage</label>
+      <div class="col-sm-8">
+        <input type="date" name="dateV" id="dateV" formControlName="dateV">
+      </div>
+    </div>
+
+
+  <div class="form-group row col-md-8">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">Aluminium</label>
+    <div class="col-sm-8">
+
+      <select id="alu" class="form-control" formControlName="alu" name="alu">
+        <option selected>Choisir...</option>
+        <option *ngFor="let alu of aluminiums; index as i">{{alu.Numero}}---{{alu.Gamme}}</option>
+      </select>
+
+    </div>
+  </div>
+
+    <div class="form-group row col-md-8"  *ngFor="let s of p;index as j">
+      <label  class="col-sm-4 col-form-label" *ngIf="j===0" >Poseurs</label>
+      <label  class="col-sm-4 col-form-label" *ngIf="j!==0" ></label>
+      <div class="col-sm-8">
+        <select id="poseur{{j}}" class="form-control" formControlName="poseur{{j}}" name="poseur{{j}}">
+          <option selected>Choisir...</option>
+          <option *ngFor="let pos of poseurs; index as i">{{(pos.Nom | uppercase)+' '+pos.Prenom}}</option>
+        </select>  </div>
+    </div>
+    <br>
+    <a (click)="addp()"><i class="fa fa-plus-circle">Ajouter un poseur</i></a>
+
+    <br>
+    <div class="form-group row col-md-8">
+      <label for="inputEmail3" class="col-sm-4 col-form-label">Date Pose</label>
+      <div class="col-sm-8">
+        <input type="date" name="dateP" id="dateP" formControlName="dateP">
+      </div>
+    </div>
+
+
+  <div class="form-group row col-md-8">
+    <label  class="col-sm-4 col-form-label">Vitreur</label>
+    <div class="col-sm-8">
+      <select >
+        <option selected>Choisir...</option>
+        <option *ngFor="let vitr of vitreurs; index as i" >{{(vitr.Nom | uppercase)+' '+vitr.Prenom}}</option>
+      </select>    </div>
+
+  </div>
+
+    <div class="form-group row col-md-8"  *ngFor="let s of v;index as j">
+      <label  class="col-sm-4 col-form-label" *ngIf="j===0" >Vitreurs</label>
+      <label  class="col-sm-4 col-form-label" *ngIf="j!==0" ></label>
+      <div class="col-sm-8">
+        <select id="vitreur{{j}}" class="form-control" formControlName="vitreur{{j}}" name="vitreur{{j}}">
+          <option selected>Choisir...</option>
+          <option *ngFor="let vitr of vitreurs; index as i" >{{(vitr.Nom | uppercase)+' '+vitr.Prenom}}</option>
+        </select></div>
+    </div>
+    <br>
+    <a (click)="addv()"><i class="fa fa-plus-circle">Ajouter un vitreur</i></a>
+
+    <div class="form-group row col-md-8"  *ngFor="let s of a;index as j">
+      <label  class="col-sm-4 col-form-label" *ngIf="j===0" >Assembleurs</label>
+      <label  class="col-sm-4 col-form-label" *ngIf="j!==0" ></label>
+      <div class="col-sm-8">
+        <select id="ass{{j}}" class="form-control" formControlName="ass{{j}}" name="ass{{j}}">
+          <option selected>Choisir...</option>
+          <option *ngFor="let ass of assembleurs; index as i" >{{(ass.Nom | uppercase)+' '+ass.Prenom}}</option>
+        </select></div>
+    </div>
+    <br>
+    <a (click)="adda()"><i class="fa fa-plus-circle">Ajouter un assembleur</i></a>
+    <br>
+
+    <div class="form-group row col-md-8">
+      <label for="inputEmail3" class="col-sm-4 col-form-label">Date Assemblage</label>
+      <div class="col-sm-8">
+        <input type="date" name="dateAss" id="dateAss" formControlName="dateAss">
+      </div>
+    </div>
+
+    <div class="form-group row col-md-8"  *ngFor="let s of i;index as j">
+    <label  class="col-sm-4 col-form-label" *ngIf="j===0" >Composantes</label>
+    <label  class="col-sm-4 col-form-label" *ngIf="j!==0" ></label>
+      <div class="col-sm-4">
+        <select id="sproduct{{j}}" class="form-control" formControlName="sproduct{{j}}" name="sproduct{{j}}">
+          <option selected>Choisir...</option>
+          <option *ngFor="let sprod of sproducts;" >{{sprod.Ref}}</option>
+        </select></div>
+      <div class="col-sm-4">
+      <input id="Nsprod{{j}}" class="form-control" type="text" formControlName="Nsprod{{j}}"  name="Nsprod{{j}}"  placeholder="Nombre d'unités">
+      </div>
+    </div>
+    <a href="/Sous-Produits" target="_blank" style="margin-left: 50%">Créer des composantes</a>
+<br>
+    <a (click)="adds()"><i class="fa fa-plus-circle">Associer une autre composante</i></a>
+  <div class="row">
+  <div class="form-group row col-md-8">
+    <label class="col-sm-4 col-form-label">Longueur</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="long" placeholder="Longueur" formControlName="long" name ="long">
+    </div>
+  </div>
+    <div class="col-md-4">
+      <span for="img" class="">cm</span><br> <img id="img" src="../../assets/images/size.png" width="50" height="50">
+    </div>
+  </div>
+
+<div class="form-group row col-md-8">
+    <label class="col-sm-4 col-form-label">Largeur</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="larg" placeholder="Largeur" formControlName="larg" name="larg">
+    </div>
+  </div>
+
+  <div class="form-row">
+
+
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+          <a (click)="choseExact()"> <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1"  value="" checked  name="customRadio" class="custom-control-input">
+            <label class="custom-control-label"  for="customRadio1">Localisation Exacte</label>
+          </div>  </a>
+          <a (click)="choseNExact()"> <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio2">Groupe---Immeuble---Etage</label>
+          </div></a>
+          <br>
+
+        </div>
+    <div class="form-group row col-md-8" *ngIf="isExact" >
+      <label for="inputEmail3" class="col-sm-4 col-form-label">Localisation exacte</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="loc" name="loc" formControlName="loc" placeholder="Localisation...">
+      </div>
+    </div>
+        <div class="col-sm-4"></div>
+
+        <div class="form-group col-md-4" *ngIf="!isExact">
+          <label for="gh">Groupe d'habitation</label>
+          <input type="text" id="gh" name="gh" formControlName="gh" class="form-control">
+
+        </div>
+        <div class="form-group col-md-4" *ngIf="!isExact">
+          <label for="im">Immeuble</label>
+          <input type="text" id="im" name="im" formControlName="im" class="form-control">
+
+        </div>
+        <div class="form-group col-md-4" *ngIf="!isExact">
+          <label for="etage">Etage</label>
+          <input type="text"  id="etage" name="etage" formControlName="etage" class="form-control">
+           </div>
+
+</div>
+<br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Lien DropBox : </label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="link" id="link" placeholder=" ex : https://www.dropbox.com/s/hjriinb9w3a2107m/exem%ple">
+
+      </div>
+    </div>
+
+  </div>
+  <button type="submit" class="btn btn-success" (click)="dem()">Confirmer</button>
+  <button  class="btn btn-danger" (click)="annuller()">Annuler</button>
+  <br><br><br><br>
+</form>
+</div>

@@ -1,0 +1,65 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+
+<div class="container-fluid">
+  <br>
+  <h1 class="text-warning">Vitreurs</h1>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr >
+      <th scope="col">CIN</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Plus</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vitreur of vitreurs ; index as i">
+      <th scope="row">{{vitreur.Code}}</th>
+      <td>{{vitreur.Nom}}</td>
+      <td>{{vitreur.Prenom}}</td>
+      <td>
+
+
+        <button style="position: relative;left: 5%" type="button" class="btn btn-danger btn-sm" (click)="delete(vitreur)">
+          Supprimer
+        </button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a class="text-success" (click)="add()" *ngIf="name==='Admin' || name==='Insert'"><img src="../../assets/images/newpr.png" width="100" height="100">Ajouter un vitreur</a>
+
+  <form [formGroup]="myform" (ngSubmit)="onSubmit()" [hidden]="demAjout===false">
+    <br><br>
+
+    <div style="position: relative;left:10%">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">CIN</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="code" id="code" placeholder="CIN">      </div>
+    </div>
+
+<div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Nom</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="nom" id="nom" placeholder="Nom">
+    </div>
+</div>
+<div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Prénom</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="prenom" id="prenom" placeholder="Prénom">
+      </div>
+    </div>
+
+    </div>
+      <br>
+      <button type="submit" class="btn btn-success" (click)="dem()">Confirmer</button>
+      <button type="submit" class="btn btn-danger" (click)="annuller()">Annuler</button>
+      <br><br><br><br>
+    </form>
+</div>

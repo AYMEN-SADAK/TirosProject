@@ -1,0 +1,14 @@
+ <div class="row side_top" *ngIf="!isConnected">
+    <div class="col-6 side_top_center">
+      <img src="../../images/unchecked.png" alt="news image" class="img-fluid navimg">
+      <span class="badge badge-pill badge-danger">Disconnected</span>
+      <a class="text-success" routerLink="/Log">Connection</a>
+    </div>
+  </div>
+    <div class="row side_top" *ngIf="isConnected" >
+      <div class="col-6 side_top_center">
+        <img src="../../images/checked.png" alt="news image" class="img-fluid navimg">
+        <span class="text-info">Connected As : </span><p class="badge-warning">{{name}}</p>
+        <a   style="cursor:pointer" class="text-danger" (click)="disconnect()" href="#">Disconnect</a>
+      </div>
+    </div>

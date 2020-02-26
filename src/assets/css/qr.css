@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  float: left;
+  width: 50%;
+  padding: 50px;
+  height: 300px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+mycol {
+  'column-count': '2'
+}
+
+.p {
+  color: red;
+}

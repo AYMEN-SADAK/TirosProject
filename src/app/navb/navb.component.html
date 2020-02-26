@@ -1,0 +1,22 @@
+<div class="sidenav" >
+<app-usersession style="position: relative;left: 20%"></app-usersession>
+  <header>
+    <div class="container-fluid px-md-5" style="position: relative;right: 4%">
+      <nav class="mnu mx-auto">
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop">
+        <ul class="menu">
+         <li routerLinkActive="active" style="text-align: center"><a routerLink="/Home" >Home</a></li><br>
+          <li routerLinkActive="active" style="text-align: center" *ngIf="!isConnected"><a routerLink="/Log" >Connection</a></li><br *ngIf="!isConnected">
+          <li routerLinkActive="active" style="text-align: center" *ngIf="!isConnected"><a routerLink="/Add" >Nouveau Compte</a></li><br *ngIf="!isConnected">
+          <li routerLinkActive="active" style="text-align: center" *ngIf="isConnected"><a routerLink="/Products" >Produits</a></li><br  *ngIf="isConnected">
+          <li routerLinkActive="active" style="text-align: center" *ngIf="isConnected"><a routerLink="/Projets" >Projets</a></li><br  *ngIf="isConnected">
+          <li routerLinkActive="active" style="text-align: center" *ngIf="isConnected"><a routerLink="/Pos-Vitr" >Alluminium  Vitrage</a></li><br  *ngIf="isConnected">
+          <li routerLinkActive="active" style="text-align: center" *ngIf="isConnected"><a routerLink="/Alu-Vitr" >Main  d'œuvre</a></li><br  *ngIf="isConnected">
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+</div>

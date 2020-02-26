@@ -1,0 +1,150 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+
+<div class="container-fluid">
+  <br>
+  <h1 class="text-warning">Projets</h1>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Description</th>
+      <th scope="col">Maitre_d'ouvrage</th>
+      <th scope="col">Architecte</th>
+      <th scope="col">Ville</th>
+      <th scope="col">Plus</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let proj of projects ; index as i">
+      <td scope="row">{{proj.Nom}}</td>
+      <th>{{proj.Description}}</th>
+      <td>{{proj.Maitre}}</td>
+      <td>{{proj.Architecte}}</td>
+      <td>{{proj.Ville}}</td>
+      <td> <button (click)="open(proj)" type="button" class="btn btn-sm btn-primary">
+        DropBox
+      </button>
+
+        <button style="position: relative;left: 5%" type="button" class="btn btn-danger btn-sm" (click)="delete(proj)">
+          Supprimer
+        </button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<a class="text-success" (click)="add()" *ngIf="name==='Admin' || name==='Insert'"><img src="../../assets/images/newpr.png" width="100" height="100">Ajouter un projet</a>
+
+<form [formGroup]="myform" (ngSubmit)="onSubmit()" [hidden]="demAjout===false">
+  <br><br>
+
+  <div style="position: relative;left:10%">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="type">Nom du Projet</label>
+    <div class=" col-md-6">
+      <input type="text" class="form-control" formControlName="nom" id="nom" placeholder="Nom">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="type">Description :</label>
+    <div class=" col-md-6">
+      <input type="text" class="form-control" formControlName="Description" id="Description" placeholder="Description">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="type">Maitre d'ouvrage :</label>
+    <div class=" col-md-6">
+      <input type="text" class="form-control" formControlName="mo" id="mo" placeholder="Maître d'ouvrage">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="type">Architecte :</label>
+    <div class=" col-md-6">
+      <input type="text" class="form-control" formControlName="arch" id="arch" placeholder="Architecte">
+
+    </div>
+  </div>
+<br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Lien DropBox : </label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="link" id="link" placeholder=" ex : https://www.dropbox.com/s/hjriinb9w3a2107m/exem%ple">
+      </div>
+    </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="type">Ville :</label>
+    <div class=" col-md-6">
+      <select formControlName="city" id="city" data-placeholder="Adresse" data-allow-clear="true">
+        <option selected value="all">Selectionnez une ville ...</option>
+        <option value="Agadir" >
+          Agadir				</option>
+        <option value="Al Hoceïma" >
+          Al Hoceïma				</option>
+        <option value="Assilah" >
+          Assilah				</option>
+        <option value="Casablanca" >
+          Casablanca				</option>
+        <option value="Chefchaouen" >
+          Chefchaouen				</option>
+        <option value="Dakhla" >
+          Dakhla				</option>
+        <option value="El Jadida" >
+          El Jadida&amp;Oualidia				</option>
+        <option value="Erfoud-Rissani" >
+          Erfoud &amp; Rissani				</option>
+        <option value="Errachidia" >
+          Errachidia				</option>
+        <option value="Essaouira" >
+          Essaouira				</option>
+        <option value="Fes" >
+          Fes				</option>
+        <option value="Ifrane" >
+          Ifrane				</option>
+        <option value="Laâyoune" >
+          Laâyoune				</option>
+        <option value="Marrakech" >
+          Marrakech				</option>
+        <option value="Meknes" >
+          Meknes				</option>
+        <option value="Merzouga" >
+          Merzouga				</option>
+        <option value="Mohammédia" >
+          Mohammédia				</option>
+        <option value="Nador" >
+          Nador				</option>
+        <option value="Ouarzazate" >
+          Ouarzazate				</option>
+        <option value="Oujda-Saïdia" >
+          Oujda&amp;Saïdia				</option>
+        <option value="Rabat" >
+          Rabat				</option>
+        <option value="Salé" >
+          Salé				</option>
+        <option value="Tanger" >
+          Tanger				</option>
+        <option value="Temara" >
+          Temara				</option>
+        <option value="Tetouan" >
+          Tetouan				</option>
+        <option value="Zagora" >
+          Zagora				</option>
+      </select>
+    </div>
+  </div>
+
+  </div>
+
+
+  <br>
+  <button type="submit" class="btn btn-success" (click)="dem()">Confirmer</button>
+  <button type="submit" class="btn btn-danger" (click)="annuller()">Annuler</button>
+  <br><br><br><br>
+</form>
+
+

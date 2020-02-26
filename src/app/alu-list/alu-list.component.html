@@ -1,0 +1,61 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+<div class="container-fluid">
+  <br>
+  <h1 class="text-warning">Aluminium</h1>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr >
+      <th scope="col">Numéro</th>
+      <th scope="col">Ral</th>
+      <th scope="col">Gamme</th>
+      <th scope="col">Plus</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let alu of aluminiums ; index as i">
+      <th scope="row">{{alu.Numero}}</th>
+      <td>{{alu.Ral}}</td>
+      <td>{{alu.Gamme}}</td>
+      <td>
+
+
+        <button style="position: relative;left: 5%" type="button" class="btn btn-danger btn-sm" (click)="delete(poseur)">
+          Supprimer
+        </button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a class="text-success" (click)="add()" *ngIf="name==='Admin' || name==='Insert'"><img src="../../assets/images/newpr.png" width="100" height="100">Ajouter un aluminium</a>
+
+  <form [formGroup]="myform" (ngSubmit)="onSubmit()" [hidden]="demAjout===false">
+    <br><br>
+
+<div style="position: relative;left:10%">
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Ral</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="ral" id="ral" placeholder="Ral">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="type">Gamme</label>
+      <div class=" col-md-6">
+        <input type="text" class="form-control" formControlName="gam" id="gam" placeholder="Gamme">
+      </div>
+    </div>
+
+</div>
+    <br>
+    <button type="submit" class="btn btn-success" (click)="dem()">Confirmer</button>
+    <button type="submit" class="btn btn-danger" (click)="annuller()">Annuler</button>
+    <br><br><br><br>
+</form>
+</div>

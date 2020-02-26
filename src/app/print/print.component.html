@@ -1,0 +1,15 @@
+<div id="print-section">
+<div class="card text-center">
+  <div class="card-header">
+    {{product.Ref}}
+  </div>
+
+    <qrcode [qrdata]="'https://tirosproject.netlify.com/product/0'" [size]="256" [level]="'M'"></qrcode>
+  </div>
+
+
+<div class="card-footer text-muted">
+  TIROS
+</div>
+</div>
+<button printSectionId="print-section" ngxPrint>print</button>

@@ -1,0 +1,35 @@
+<img  src="../assets/images/logoG.png" style="float: right; margin-right: 1%" >
+<img   src="../assets/images/logoT.png" style="float: left ; margin-left: 1%">
+
+<section class="wedo" id="secfom">
+ <form [formGroup]="AddForm" (ngSubmit)="OnSubmit()">
+   <br><br><br><br><br><br>
+   <div class="form-group row" style="margin-left: 20%">
+     <label for="staticEmail" class="col-sm-3 col-form-label">Login :</label>
+     <div class="col-sm-6">
+       <input class="form-control"   formControlName="login" type="text" name="login" id="login" placeholder="Login" required="">
+     </div>
+   </div>
+   <div class="form-group row" style="margin-left: 20%">
+     <label for="inputPassword" class="col-sm-3 col-form-label">Mot de Passe :</label>
+     <div class="col-sm-6">
+       <input class="form-control" formControlName="password" type="password" name="password" id="password" placeholder="Mot de passe" required="">
+     </div>
+   </div>
+   <div class="form-group row" style="margin-left: 20%">
+     <label for="staticEmail" class="col-sm-3 col-form-label">Rôle :</label>
+     <div class="col-sm-6">
+       <select class="form-control" formControlName="name" type="text" name="name" id="name" placeholder="Nom" required="">
+         <option selected value="Admin">Administrateur</option>
+         <option value="Visiteur">Visiteur</option>
+         <option value="Insert">Rôle Insertion</option>
+         <option value="Impr">Rôle Impression</option>
+       </select>
+     </div></div>
+   <button type="submit">Add</button>
+   <span class="text-danger">{{errorMessage}}</span>
+ </form>
+</section>
+<br>
+
+
